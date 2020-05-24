@@ -2,18 +2,22 @@ package nl.terrax.tbrestmongodb.controller;
 
 import nl.terrax.tbrestmongodb.model.Beer;
 import nl.terrax.tbrestmongodb.service.BeerService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+@SuppressWarnings("unused")
 @RestController
-@RequestMapping("/beers")
+@RequestMapping("/beers/1.0")
 public class BeerController {
-    @Autowired
-    private BeerService beerService;
+
+    private final BeerService beerService;
+
+    public BeerController(BeerService beerService) {
+        this.beerService = beerService;
+    }
 
     @GetMapping(value = "/")
     public List<Beer> getAllBeers() {
@@ -35,4 +39,5 @@ public class BeerController {
     public void deleteBeer(@PathVariable("beerName") String name) {
         beerService.deleteBeer(beerService.findByName(name).getId());
     }
+
 }

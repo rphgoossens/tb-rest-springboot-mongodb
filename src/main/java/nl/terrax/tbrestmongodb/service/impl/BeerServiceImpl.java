@@ -3,7 +3,6 @@ package nl.terrax.tbrestmongodb.service.impl;
 import nl.terrax.tbrestmongodb.model.Beer;
 import nl.terrax.tbrestmongodb.repository.BeerRepository;
 import nl.terrax.tbrestmongodb.service.BeerService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -11,8 +10,11 @@ import java.util.List;
 @Service
 public class BeerServiceImpl implements BeerService {
 
-    @Autowired
-    BeerRepository beerRepository;
+    private final BeerRepository beerRepository;
+
+    public BeerServiceImpl(BeerRepository beerRepository) {
+        this.beerRepository = beerRepository;
+    }
 
     @Override
     public List<Beer> findAll() {
